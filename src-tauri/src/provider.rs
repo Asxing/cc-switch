@@ -235,6 +235,10 @@ pub struct ProviderMeta {
     /// - "openai_chat": OpenAI Chat Completions 格式，需要转换
     #[serde(rename = "apiFormat", skip_serializing_if = "Option::is_none")]
     pub api_format: Option<String>,
+    /// 自定义请求头（用于向上游 Provider 发送额外的请求头）
+    #[serde(default, skip_serializing_if = "HashMap::is_empty")]
+    #[serde(rename = "customHeaders")]
+    pub custom_headers: HashMap<String, String>,
 }
 
 impl ProviderManager {
@@ -934,5 +938,61 @@ mod tests {
 
         assert!(toml.contains("base_url = \"https://example.com/openai\""));
         assert!(!toml.contains("https://example.com/openai/v1"));
+    }
+
+    #[test]
+    fn provider_meta_serializes_custom_headers() {
+        use std::collections::HashMap;
+
+        let mut custom_headers = HashMap::new();
+        custom_headers.insert("X-Working-Dir".to_string(), "/User/Document/source".to_string());
+        custom_headers.insert("X-Custom-Header".to_string(), "custom-value".to_string());
+
+        let mut meta = ProviderMeta::default();
+        meta.custom_headers = custom_headers;
+
+        let value = serde_json::to_value(&meta).expect("serialize ProviderMeta");
+
+        // Verify customHeaders is serialized with the correct camelCase name
+        let custom_headers_value = value.get("customHeaders").expect("customHeaders field should exist");
+        assert_eq!(
+            custom_headers_value.get("X-Working-Dir").and_then(|v| v.as_str()),
+            Some("/User/Document/source")
+        );
+        assert_eq!(
+            custom_headers_value.get("X-Custom-Header").and_then(|v| v.as_str()),
+            Some("custom-value")
+        );
+    }
+
+    #[test]
+    fn provider_meta_omits_custom_headers_when_empty() {
+        let meta = ProviderMeta::default();
+        let value = serde_json::to_value(&meta).expect("serialize ProviderMeta");
+
+        // Empty custom_headers should not be serialized
+        assert!(value.get("customHeaders").is_none());
+    }
+
+    #[test]
+    fn provider_meta_deserializes_custom_headers() {
+        let json = json!({
+            "customHeaders": {
+                "X-Working-Dir": "/User/Document/source",
+                "X-Custom-Header": "custom-value"
+            }
+        });
+
+        let meta: ProviderMeta = serde_json::from_value(json).expect("deserialize ProviderMeta");
+
+        assert_eq!(meta.custom_headers.len(), 2);
+        assert_eq!(
+            meta.custom_headers.get("X-Working-Dir"),
+            Some(&"/User/Document/source".to_string())
+        );
+        assert_eq!(
+            meta.custom_headers.get("X-Custom-Header"),
+            Some(&"custom-value".to_string())
+        );
     }
 }
