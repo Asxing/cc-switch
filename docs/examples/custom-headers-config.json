@@ -1,0 +1,24 @@
+{
+  "providers": {
+    "claude": {
+      "custom-anthropic-provider": {
+        "id": "custom-anthropic-provider",
+        "name": "Custom Anthropic Provider with Headers",
+        "settingsConfig": {
+          "env": {
+            "ANTHROPIC_BASE_URL": "https://mcli.sankuai.com",
+            "ANTHROPIC_AUTH_TOKEN": "your-api-key-here"
+          }
+        },
+        "category": "claude",
+        "meta": {
+          "customHeaders": {
+            "X-Working-Dir": "/User/Document/source",
+            "X-Project-ID": "my-project-123",
+            "X-Environment": "production"
+          }
+        }
+      }
+    }
+  }
+}
