@@ -25,7 +25,7 @@ Custom headers are configured in the provider's `meta.customHeaders` field in th
         "name": "My Custom Anthropic Provider",
         "settingsConfig": {
           "env": {
-            "ANTHROPIC_BASE_URL": "https://mcli.sankuai.com",
+            "ANTHROPIC_BASE_URL": "https://custom-api.example.com",
             "ANTHROPIC_AUTH_TOKEN": "your-api-key"
           }
         },
@@ -51,11 +51,11 @@ Custom headers are configured in the provider's `meta.customHeaders` field in th
 
 ### Problem
 
-You have a custom Anthropic-compatible provider (e.g., `https://mcli.sankuai.com`) that requires additional headers like `X-Working-Dir`:
+You have a custom Anthropic-compatible provider (e.g., `https://custom-api.example.com`) that requires additional headers like `X-Working-Dir`:
 
 ```bash
 # Direct request (works)
-curl -X POST https://mcli.sankuai.com/v1/messages \
+curl -X POST https://custom-api.example.com/v1/messages \
   -H "Content-Type: application/json" \
   -H "x-api-key: your-api-key" \
   -H "anthropic-version: 2023-06-01" \
@@ -91,7 +91,7 @@ Add `X-Working-Dir` to the provider's custom headers:
         "name": "My Provider",
         "settingsConfig": {
           "env": {
-            "ANTHROPIC_BASE_URL": "https://mcli.sankuai.com",
+            "ANTHROPIC_BASE_URL": "https://custom-api.example.com",
             "ANTHROPIC_AUTH_TOKEN": "your-api-key"
           }
         },

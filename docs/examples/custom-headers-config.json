@@ -6,7 +6,7 @@
         "name": "Custom Anthropic Provider with Headers",
         "settingsConfig": {
           "env": {
-            "ANTHROPIC_BASE_URL": "https://mcli.sankuai.com",
+            "ANTHROPIC_BASE_URL": "https://custom-api.example.com",
             "ANTHROPIC_AUTH_TOKEN": "your-api-key-here"
           }
         },

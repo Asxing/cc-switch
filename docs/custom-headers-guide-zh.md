@@ -25,7 +25,7 @@ CC-Switch 现在支持为 Provider 配置自定义 HTTP 请求头。这使您可
         "name": "我的自定义 Anthropic Provider",
         "settingsConfig": {
           "env": {
-            "ANTHROPIC_BASE_URL": "https://mcli.sankuai.com",
+            "ANTHROPIC_BASE_URL": "https://custom-api.example.com",
             "ANTHROPIC_AUTH_TOKEN": "your-api-key"
           }
         },
@@ -51,11 +51,11 @@ CC-Switch 现在支持为 Provider 配置自定义 HTTP 请求头。这使您可
 
 ### 问题描述
 
-您有一个自定义的 Anthropic 兼容 Provider（例如 `https://mcli.sankuai.com`），它需要额外的请求头如 `X-Working-Dir`：
+您有一个自定义的 Anthropic 兼容 Provider（例如 `https://custom-api.example.com`），它需要额外的请求头如 `X-Working-Dir`：
 
 ```bash
 # 直接请求（成功）
-curl -X POST https://mcli.sankuai.com/v1/messages \
+curl -X POST https://custom-api.example.com/v1/messages \
   -H "Content-Type: application/json" \
   -H "x-api-key: your-api-key" \
   -H "anthropic-version: 2023-06-01" \
@@ -91,7 +91,7 @@ curl -X POST http://127.0.0.1:15721/v1/messages \
         "name": "我的 Provider",
         "settingsConfig": {
           "env": {
-            "ANTHROPIC_BASE_URL": "https://mcli.sankuai.com",
+            "ANTHROPIC_BASE_URL": "https://custom-api.example.com",
             "ANTHROPIC_AUTH_TOKEN": "your-api-key"
           }
         },
