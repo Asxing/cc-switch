@@ -14,6 +14,8 @@ CC-Switch 现在支持为 Provider 配置自定义 HTTP 请求头。这使您可
 
 ### 配置示例
 
+> **注意**：示例中显示的请求头值（如 `X-Working-Dir: /User/Document/source`）来自原始问题报告。请将这些替换为您的 Provider 实际需要的值。
+
 ```json
 {
   "providers": {

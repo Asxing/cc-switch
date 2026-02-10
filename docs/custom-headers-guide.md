@@ -14,6 +14,8 @@ Custom headers are configured in the provider's `meta.customHeaders` field in th
 
 ### Example Configuration
 
+> **Note**: The header values shown (like `X-Working-Dir: /User/Document/source`) are examples from the original issue report. Replace these with the actual values required by your provider.
+
 ```json
 {
   "providers": {
