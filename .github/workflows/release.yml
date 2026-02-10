@@ -184,8 +184,6 @@ jobs:
           # Search for DMG in dmg subdirectory
           for path in \
             "src-tauri/target/universal-apple-darwin/release/bundle/dmg" \
-            "src-tauri/target/aarch64-apple-darwin/release/bundle/dmg" \
-            "src-tauri/target/x86_64-apple-darwin/release/bundle/dmg" \
             "src-tauri/target/release/bundle/dmg"; do
             if [ -d "$path" ]; then
               [ -z "$DMG_PATH" ] && DMG_PATH=$(find "$path" -maxdepth 1 -name "*.dmg" -type f | head -1 || true)
@@ -212,7 +210,7 @@ jobs:
           fi
           # Copy DMG if found
           if [ -n "$DMG_PATH" ]; then
-            NEW_DMG="CC-Switch-${VERSION}-macOS-arm64.dmg"
+            NEW_DMG="CC-Switch-${VERSION}-macOS.dmg"
             cp "$DMG_PATH" "release-assets/$NEW_DMG"
             echo "macOS DMG copied: $NEW_DMG"
           else
@@ -330,7 +328,7 @@ jobs:
 
             ### 下载
 
-            - **macOS**: `CC-Switch-${{ github.ref_name }}-macOS.zip`（解压即用）、`CC-Switch-${{ github.ref_name }}-macOS-arm64.dmg`（ARM 安装包）或 `CC-Switch-${{ github.ref_name }}-macOS.tar.gz`（Homebrew）
+            - **macOS**: `CC-Switch-${{ github.ref_name }}-macOS.zip`（解压即用）、`CC-Switch-${{ github.ref_name }}-macOS.dmg`（DMG 安装包）或 `CC-Switch-${{ github.ref_name }}-macOS.tar.gz`（Homebrew）
             - **Windows**: `CC-Switch-${{ github.ref_name }}-Windows.msi`（安装版）或 `CC-Switch-${{ github.ref_name }}-Windows-Portable.zip`（绿色版）
             - **Linux (x86_64)**: `CC-Switch-${{ github.ref_name }}-Linux-x86_64.AppImage` / `.deb` / `.rpm`
             - **Linux (ARM64)**: `CC-Switch-${{ github.ref_name }}-Linux-arm64.AppImage` / `.deb` / `.rpm`

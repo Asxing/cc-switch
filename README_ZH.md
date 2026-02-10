@@ -196,7 +196,7 @@ brew upgrade --cask cc-switch
 
 **方式二：手动下载**
 
-从 [Releases](../../releases) 页面下载 `CC-Switch-v{版本号}-macOS.zip`（通用版本，解压使用）或 `CC-Switch-v{版本号}-macOS-arm64.dmg`（ARM 安装包）。
+从 [Releases](../../releases) 页面下载 `CC-Switch-v{版本号}-macOS.zip`（通用版本，解压使用）或 `CC-Switch-v{版本号}-macOS.dmg`（DMG 安装包）。
 
 > **注意**：由于作者没有苹果开发者账号，首次打开可能出现"未知开发者"警告，请先关闭，然后前往"系统设置" → "隐私与安全性" → 点击"仍要打开"，之后便可以正常打开
 
