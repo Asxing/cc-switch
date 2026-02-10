@@ -654,6 +654,14 @@ impl RequestForwarder {
             request = adapter.add_auth_headers(request, &auth);
         }
 
+        // 应用自定义请求头（从 Provider meta 配置中读取）
+        if let Some(meta) = &provider.meta {
+            for (key, value) in &meta.custom_headers {
+                log::debug!("[{}] >>> 添加自定义请求头: {}: {}", adapter.name(), key, value);
+                request = request.header(key, value);
+            }
+        }
+
         // anthropic-version 统一处理（仅 Claude）：优先使用客户端的版本号，否则使用默认值
         // 注意：只设置一次，避免重复
         if adapter.name() == "Claude" {

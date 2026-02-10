@@ -617,4 +617,39 @@ mod tests {
         );
         assert!(!adapter.needs_transform(&unknown_format));
     }
+
+    #[test]
+    fn test_custom_headers_in_provider_meta() {
+        use std::collections::HashMap;
+
+        let mut custom_headers = HashMap::new();
+        custom_headers.insert("X-Working-Dir".to_string(), "/User/Document/source".to_string());
+        custom_headers.insert("X-Custom-Header".to_string(), "custom-value".to_string());
+
+        let provider = create_provider_with_meta(
+            json!({
+                "env": {
+                    "ANTHROPIC_BASE_URL": "https://api.anthropic.com",
+                    "ANTHROPIC_AUTH_TOKEN": "sk-ant-test-key"
+                }
+            }),
+            ProviderMeta {
+                custom_headers,
+                ..Default::default()
+            },
+        );
+
+        // Verify custom headers are stored in provider meta
+        assert!(provider.meta.is_some());
+        let meta = provider.meta.as_ref().unwrap();
+        assert_eq!(meta.custom_headers.len(), 2);
+        assert_eq!(
+            meta.custom_headers.get("X-Working-Dir"),
+            Some(&"/User/Document/source".to_string())
+        );
+        assert_eq!(
+            meta.custom_headers.get("X-Custom-Header"),
+            Some(&"custom-value".to_string())
+        );
+    }
 }
