@@ -195,7 +195,7 @@ brew upgrade --cask cc-switch
 
 **方法 2: 手動ダウンロード**
 
-[Releases](../../releases) から `CC-Switch-v{version}-macOS.zip` をダウンロードして展開。
+[Releases](../../releases) から `CC-Switch-v{version}-macOS.zip`（ユニバーサルバイナリ、展開して使用）または `CC-Switch-v{version}-macOS-arm64.dmg`（ARM インストーラー）をダウンロード。
 
 > **注意**: 開発者アカウント未登録のため、初回起動時に「開発元を確認できません」と表示される場合があります。一度閉じてから「システム設定」→「プライバシーとセキュリティ」→「このまま開く」をクリックしてください。以降は通常通り起動できます。
 

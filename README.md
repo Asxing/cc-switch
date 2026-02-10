@@ -195,7 +195,7 @@ brew upgrade --cask cc-switch
 
 **Method 2: Manual Download**
 
-Download `CC-Switch-v{version}-macOS.zip` from the [Releases](../../releases) page and extract to use.
+Download `CC-Switch-v{version}-macOS.zip` (universal binary, extract to use) or `CC-Switch-v{version}-macOS-arm64.dmg` (ARM installer) from the [Releases](../../releases) page.
 
 > **Note**: Since the author doesn't have an Apple Developer account, you may see an "unidentified developer" warning on first launch. Please close it first, then go to "System Settings" → "Privacy & Security" → click "Open Anyway", and you'll be able to open it normally afterwards.
 
